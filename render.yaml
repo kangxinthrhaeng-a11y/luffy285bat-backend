@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: luffy285bat-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: ADMIN_TOKEN
+        sync: false
+      - key: WEBHOOK_SECRET
+        sync: false
+      - key: PROMPTPAY_ID
+        sync: false
+      - key: LINE_CHANNEL_ID
+        sync: false
+      - key: LINE_CHANNEL_ACCESS_TOKEN
+        sync: false
+      - key: TMWEASY_USERNAME
+        sync: false
+      - key: TMWEASY_PASSWORD
+        sync: false
+      - key: TMWEASY_CON_ID
+        sync: false
+      - key: TMWEASY_API_KEY
+        sync: false
+      - key: TMWEASY_PROMPTPAY_ID
+        sync: false
+      - key: NODE_VERSION
+        value: 18
