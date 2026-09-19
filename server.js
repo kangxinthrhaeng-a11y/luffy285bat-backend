@@ -288,6 +288,9 @@ app.post('/api/payment/webhook/tmweasy', (req, res) => {
         const reference = String(payment.ref1 || '');
         const isLineUser = reference.startsWith('U');
         const user = isLineUser ? walletStore.getUserByLineId(reference) : walletStore.getUser(reference);
+        if (!user) {
+            return res.status(404).json({ status: 0, success: false, message: 'ไม่พบบัญชีสมาชิกจาก ref1' });
+        }
         const result = walletStore.credit({
             phone: isLineUser ? null : reference,
             lineUserId: isLineUser ? reference : null,
