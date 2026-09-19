@@ -261,6 +261,8 @@ async function createTmweasyPayment({ amount, reference, ip }) {
 }
 
 app.post('/api/payment/tmweasy/create', async (req, res) => {
+    return res.status(410).json({ success: false, message: 'ระบบฝากเงินปิดชั่วคราว' });
+    /*
     const { phone, lineUserId, amount } = req.body;
     const numericAmount = Number(amount);
     if ((!phone && !lineUserId) || !Number.isInteger(numericAmount) || numericAmount <= 0) {
@@ -272,9 +274,12 @@ app.post('/api/payment/tmweasy/create', async (req, res) => {
     } catch (error) {
         res.status(502).json({ success: false, message: error.message });
     }
+    */
 });
 
 app.post('/api/payment/webhook/tmweasy', (req, res) => {
+    return res.status(410).json({ status: 0, success: false, message: 'ระบบฝากเงินปิดชั่วคราว' });
+    /*
     if (!tmweasyApiKey) return unavailable(res, 'ยังไม่ได้ตั้งค่า TMWEASY_API_KEY');
     const { data, signature } = req.body;
     if (!data || !signature) return res.status(400).json({ success: false, message: 'ข้อมูล TMWEASY webhook ไม่ครบถ้วน' });
@@ -305,4 +310,5 @@ app.post('/api/payment/webhook/tmweasy', (req, res) => {
     } catch (error) {
         return res.status(400).json({ status: 0, success: false, message: error.message });
     }
+    */
 });
